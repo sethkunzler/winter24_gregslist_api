@@ -8,7 +8,7 @@ export class HousesController extends BaseController {
       .get('', this.getHouses)
       .post('', this.createHouse)
       .get('/:houseId', this.getHouseById)
-      // .put('/:carId', this.updateCar)
+      .put('/:houseId', this.updateHouse)
       // .delete('/:carId', this.destroyCar)
   }
 
@@ -55,7 +55,22 @@ export class HousesController extends BaseController {
     } catch (error) {
       next(error)
     }
-
   }
+
+  /**
+  * @param {import("express").Request} request
+  * @param {import("express").Response} response
+  * @param {import("express").NextFunction} next
+  */
+  async updateHouse(request, response, next) {
+    try {
+      const houseId = request.params.houseId
+      const houseData = request.body
+      const house = await housesService.updateHouse(houseId, houseData)
+      response.send(house)
+    } catch (error) {
+      next(error)
+    }
+  } 
   
 }
