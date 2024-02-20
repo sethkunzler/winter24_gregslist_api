@@ -8,7 +8,6 @@ export const CarSchema = new Schema(
     price: { type: Number, required: true, min: 0, max: 1000000 },
     color: { type: String, maxLength: 7 },
     imgUrl: { type: String, required: true, minLength: 10, maxLength: 1000 },
-    hasSalvagedTitle: { type: Boolean, required: true, default: false },
+    hasSalvagedTitle: { type: Boolean, required: true, default: false }
   }
 )
-
