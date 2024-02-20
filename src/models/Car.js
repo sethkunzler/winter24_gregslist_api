@@ -9,5 +9,9 @@ export const CarSchema = new Schema(
     color: { type: String, maxLength: 7 },
     imgUrl: { type: String, required: true, minLength: 10, maxLength: 1000 },
     hasSalvagedTitle: { type: Boolean, required: true, default: false }
+  },
+  {
+    // timestamps: true,
+    toJSON: { virtuals: true }
   }
 )
