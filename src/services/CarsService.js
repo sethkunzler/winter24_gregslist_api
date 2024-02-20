@@ -23,6 +23,35 @@ class CarsService {
 
     return car
   }
+
+  async updateCar(carId, carData) {
+    // const car = await dbContext.Cars.findByIdAndUpdate(carId, carData)
+
+    // const carToUpdate = dbContext.Cars.findById(carId)
+
+    const carToUpdate = await this.getCarById(carId)
+
+    // carToUpdate.make = carData.make
+
+
+    carToUpdate.imgUrl = carData.imgUrl || carToUpdate.imgUrl
+
+    carToUpdate.price = carData.price == undefined ?
+      carToUpdate.price
+      :
+      carData.price
+
+
+    carToUpdate.hasSalvagedTitle = carData.hasSalvagedTitle == undefined ?
+      carToUpdate.hasSalvagedTitle
+      :
+      carData.hasSalvagedTitle
+
+    await carToUpdate.save()
+
+    return carToUpdate
+  }
+
 }
 
 export const carsService = new CarsService()

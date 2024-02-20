@@ -8,6 +8,7 @@ export class CarsController extends BaseController {
       .get('', this.getCars)
       .post('', this.createCar)
       .get('/:carId', this.getCarById)
+      .put('/:carId', this.updateCar)
   }
 
   /**
@@ -49,6 +50,22 @@ export class CarsController extends BaseController {
     try {
       const carId = request.params.carId
       const car = await carsService.getCarById(carId)
+      response.send(car)
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  /**
+  * @param {import("express").Request} request
+  * @param {import("express").Response} response
+  * @param {import("express").NextFunction} next
+  */
+  async updateCar(request, response, next) {
+    try {
+      const carId = request.params.carId
+      const carData = request.body
+      const car = await carsService.updateCar(carId, carData)
       response.send(car)
     } catch (error) {
       next(error)
