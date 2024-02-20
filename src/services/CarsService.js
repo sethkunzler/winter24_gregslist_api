@@ -3,6 +3,7 @@ import { BadRequest } from "../utils/Errors.js"
 
 class CarsService {
 
+
   async getCars() {
     // NOTE dbContext allows us to communicate with our database. Cars is the collection in our database we are accessing. find is the mongoose method to query and retrieve data from our collection. If you don't pass an argument to find, it returns all "documents" from the database. find also returns an array
     const cars = await dbContext.Cars.find()
@@ -50,6 +51,15 @@ class CarsService {
     await carToUpdate.save()
 
     return carToUpdate
+  }
+
+  async destroyCar(carId) {
+    // await dbContext.Cars.findByIdAndDelete(carId)
+    const carToDestroy = await this.getCarById(carId)
+
+    await carToDestroy.deleteOne()
+
+    return `${carToDestroy.make} ${carToDestroy.model} has been destroyed!`
   }
 
 }
