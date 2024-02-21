@@ -17,6 +17,17 @@ class HousesService {
     }
     return house
   }
+  async updateHouse(houseId, houseData) {
+    const houseToUpdate = await this.getHouseById(houseId)
+
+    houseToUpdate.price = houseData.price == undefined ? houseToUpdate.price : houseData.price
+    houseToUpdate.imgUrl = houseData.imgUrl == undefined ? houseToUpdate.imgUrl : houseData.imgUrl
+    houseToUpdate.description = houseData.description == undefined ? houseToUpdate.description : houseData.description
+
+    await houseToUpdate.save()
+    
+    return houseToUpdate
+  }
 }
 
 export const housesService = new HousesService()
